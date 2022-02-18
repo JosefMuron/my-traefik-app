@@ -8,9 +8,21 @@ spec:
   source:
     chart: traefik
     repoURL: https://helm.traefik.io/traefik
-    targetRevision: 10.14.0
+    targetRevision: 10.14.1
     helm:
       values: |
+        ports:
+          apigw:
+            port: 9090
+            expose: true
+            exposedPort: 9090
+            protocol: TCP
+          consul:
+            port: 8500
+            expose: true
+            exposedPort: 8500
+            protocol: TCP
+
         service:
           enabled: true
           type: NodePort
