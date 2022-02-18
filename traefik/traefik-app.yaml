@@ -6,7 +6,10 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/traefik/traefik-helm-chart
+    type: HelmRepo
+    repository: https://helm.traefik.io/traefik
+    name: traefik
+    version: 10.14.1
     helm:
       values: |
         service:
