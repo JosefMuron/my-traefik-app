@@ -6,7 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/traefik/traefik-helm-chart
+#    repoURL: https://github.com/traefik/traefik-helm-chart
+    repoURL: https://helm.traefik.io/traefik
     # chart: traefik-helm-chart
     # targetRevision: 10.14.1
     helm:
@@ -25,11 +26,11 @@ spec:
 
         service:
           enabled: true
-          type: LoadBalancer
-            annotations: {
-              service.beta.kubernetes.io/aws-load-balancer-internal: "true",
-              service.beta.kubernetes.io/aws-load-balancer-type: "nlb",
-              service.beta.kubernetes.io/aws-load-balancer-name: "test03-eks-traefik-lb"
+          type: NodePort
+            # annotations: {
+            #   service.beta.kubernetes.io/aws-load-balancer-internal: "true",
+            #   service.beta.kubernetes.io/aws-load-balancer-type: "nlb",
+            #   service.beta.kubernetes.io/aws-load-balancer-name: "test03-eks-traefik-lb"
           
   destination:
     server: https://kubernetes.default.svc
