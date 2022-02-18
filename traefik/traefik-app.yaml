@@ -10,7 +10,7 @@ spec:
     # chart: traefik-helm-chart
     # targetRevision: 10.14.1
     helm:
-      values:
+      values:  |
         ports:
           apigw:
             port: 9090
