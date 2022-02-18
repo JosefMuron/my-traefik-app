@@ -8,7 +8,7 @@ spec:
   source:
     chart: traefik/traefik
     repoURL: https://helm.traefik.io/traefik
-    #targetRevision: 10.14.1
+    targetRevision: 10.14.0
     helm:
       values: |
         service:
