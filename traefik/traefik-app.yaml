@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: traefik/traefik
+    chart: traefik
     repoURL: https://helm.traefik.io/traefik
-    targetRevision: 10.14.0
+    targetRevision: 10.14.1
     helm:
       values: |
         service:
