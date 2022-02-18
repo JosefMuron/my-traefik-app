@@ -2,39 +2,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: traefik
-  namespace: traefik
+  namespace: argocd
 spec:
   project: default
   source:
-    #repoURL: https://github.com/traefik/traefik-helm-chart.git
-    #path: traefik/traefik-helm-chart
     repoURL: https://github.com/traefik/traefik-helm-chart
-
-    # repoURL: https://github.com/traefik/traefik-helm-chart
-    # repoURL: https://helm.traefik.io/traefik
-    # chart: traefik-helm-chart
-    # targetRevision: 10.14.1
     helm:
       values: |
-        ports:
-          apigw:
-            port: 9090
-            expose: true
-            exposedPort: 9090
-            protocol: TCP
-          consul:
-            port: 8500
-            expose: true
-            exposedPort: 8500
-            protocol: TCP
-
         service:
           enabled: true
           type: NodePort
-            # annotations: {
-            #   service.beta.kubernetes.io/aws-load-balancer-internal: "true",
-            #   service.beta.kubernetes.io/aws-load-balancer-type: "nlb",
-            #   service.beta.kubernetes.io/aws-load-balancer-name: "test03-eks-traefik-lb"
           
   destination:
     server: https://kubernetes.default.svc
