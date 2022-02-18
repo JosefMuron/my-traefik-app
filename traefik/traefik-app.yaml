@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/traefik/traefik-helm-chart.git
-    path: traefik/traefik-helm-chart
+    #path: traefik/traefik-helm-chart
     targetRevision: 693589edd140c6e6677d15755f5f6918ce33c5b5
 
     # repoURL: https://github.com/traefik/traefik-helm-chart
