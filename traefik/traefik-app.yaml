@@ -9,7 +9,7 @@ spec:
     repoURL: https://github.com/traefik/traefik-helm-chart
     # repoURL: https://helm.traefik.io/traefik
     # chart: traefik-helm-chart
-    targetRevision: 10.14.0
+    targetRevision: 10.14.1
     helm:
       values:  |
         ports:
