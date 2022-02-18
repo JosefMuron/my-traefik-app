@@ -2,14 +2,18 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: traefik
-  namespace: argocd
+  namespace: traefik
 spec:
   project: default
   source:
-    repoURL: https://github.com/traefik/traefik-helm-chart
+    repoURL: https://github.com/traefik/traefik-helm-chart.git
+    path: traefik/traefik-helm-chart
+    targetRevision: 693589edd140c6e6677d15755f5f6918ce33c5b5
+
+    # repoURL: https://github.com/traefik/traefik-helm-chart
     # repoURL: https://helm.traefik.io/traefik
     # chart: traefik-helm-chart
-    targetRevision: 10.14.1
+    # targetRevision: 10.14.1
     helm:
       values:  |
         ports:
