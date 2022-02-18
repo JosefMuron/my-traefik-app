@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: ingressroutetcp-apigw-svc
+  namespace: ingressroutes
+spec:
+  entryPoints:
+    - apigw
+  routes:
+  - match: HostSNI(`*`)
+    services:
+    - name: nginx
+      namespace: pepa
+      port: 9090
