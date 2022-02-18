@@ -38,7 +38,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteTCP
 metadata:
   name: ingressroutetcp-apigw-svc
-  namespace: traefik2
+  namespace: traefik
 spec:
   entryPoints:
     - apigw
