@@ -32,6 +32,11 @@ spec:
             expose: true
             exposedPort: 8500
             protocol: TCP
+          metrics:
+            port: 9100
+            expose: true
+            exposedPort: 9100
+            protocol: TCP            
 
         providers:
           kubernetesCRD:
