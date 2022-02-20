@@ -65,7 +65,26 @@ spec:
     - web
   routes:
   - match: HostSNI(`*`)
+    middlewares:
+    - name: middlewaretcp-ipwhitelist-nginx
+      namespace: nginx
     services:
     - name: nginx
       namespace: nginx
       port: 9090
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: MiddlewareTCP
+metadata:
+  name: middlewaretcp-ipwhitelist-nginx
+  namespace: nginx
+spec:
+  ipWhiteList:
+    sourceRange:
+      # - 193.165.201.34
+      - 127.0.0.1/32
+      # - 94.242.124.58
+      # - 54.155.204.184
+      # - 34.250.192.16
+      # - 52.19.166.176
+      - 10.29.0.0/16
