@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-#    chart: traefik
-    repoURL: https://github.com/traefik/traefik-helm-chart
-    targetRevision: 249c289
+    chart: traefik
+    repoURL: https://helm.traefik.io/traefik
+    targetRevision: 10.14.2
     helm:
       values: |
         ports:
@@ -22,21 +22,16 @@ spec:
             expose: true
             exposedPort: 9090
             protocol: TCP
-          consul:
-            port: 9000
+          metrics:
+            port: 9100
             expose: true
-            exposedPort: 9000
+            exposedPort: 9100
             protocol: TCP
           consul:
             port: 8500
             expose: true
             exposedPort: 8500
             protocol: TCP
-          metrics:
-            port: 9100
-            expose: true
-            exposedPort: 9100
-            protocol: TCP            
 
         providers:
           kubernetesCRD:
