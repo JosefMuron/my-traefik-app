@@ -8,7 +8,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: traefik
   source:
-    path: ingressroutes/
+    path: traefik/ingressroutes/
     repoURL: https://github.com/JosefMuron/my-traefik-app.git
     targetRevision: HEAD
     directory:
