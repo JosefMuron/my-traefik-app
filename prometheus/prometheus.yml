@@ -1,33 +1,41 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: prometheus
-  namespace: argocd
+  name: prometheus-deployment
+  namespace: monitoring
+  labels:
+    app: prometheus-server
 spec:
-  project: default
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    chart: prometheus
-    targetRevision: 15.1.1
-    helm:
-      values: |
-        alertmanager:
-          nodeSelector: 
-            zonky_node: infrastructure
-        
-        server:
-          nodeSelector: 
-            zonky_node: infrastructure
-        
-        pushgateway:
-          nodeSelector: 
-            zonky_node: infrastructure
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: prometheus
-  syncPolicy:
-    automated:
-      selfHeal: false
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-server
+  template:
+    metadata:
+      labels:
+        app: prometheus-server
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+          ports:
+            - containerPort: 9090
+      #     volumeMounts:
+      #       - name: prometheus-config-volume
+      #         mountPath: /etc/prometheus/
+      #       - name: prometheus-storage-volume
+      #         mountPath: /prometheus/
+      # volumes:
+      #   - name: prometheus-config-volume
+      #     configMap:
+      #       defaultMode: 420
+      #       name: prometheus-server-conf
+  
+      #   - name: prometheus-storage-volume
+      #     emptyDir: {}
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
