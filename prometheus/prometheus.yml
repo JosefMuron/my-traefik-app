@@ -28,3 +28,20 @@ spec:
   syncPolicy:
     automated:
       selfHeal: false
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-ingressroute-http
+  namespace: monitoring
+spec:
+  entryPoints:
+    - web
+  routes:
+  - kind: Rule
+    match: "Host(`localhost`)"    
+    # middlewares:
+    #   - name: grafana-middleware-stripprefixregex
+    services:
+    - name: prometheus
+      port: 80
