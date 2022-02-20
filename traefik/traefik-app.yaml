@@ -47,6 +47,12 @@ spec:
             # service.beta.kubernetes.io/aws-load-balancer-name: "test03-eks-traefik-lb"
           }          
           
+        logs:
+          general:
+            level: DEBUG
+          access:
+            enabled: true
+
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
