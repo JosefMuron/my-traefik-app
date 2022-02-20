@@ -37,6 +37,20 @@ spec:
       #   - name: prometheus-storage-volume
       #     emptyDir: {}
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  selector:
+    app: prometheus-server
+  type: ClusterIP
+  ports:
+  - name:  http
+    port:  9090
+    targetPort: 9090
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
