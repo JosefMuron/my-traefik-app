@@ -66,4 +66,5 @@ spec:
     #   - name: grafana-middleware-stripprefixregex
     services:
     - name: prometheus
+      namespace: monitoring
       port: 9090
