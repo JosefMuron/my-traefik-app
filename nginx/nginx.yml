@@ -54,35 +54,18 @@ spec:
   - name:  http
     port:  9090
     targetPort: 80
-# ---
-
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: nginx
-#   namespace: pepa
-#   annotations:
-#     # (Optional): Annotations for the Ingress Controller
-#     # ---
-#     # General:
-#     # kubernetes.io/ingress.class: traefik
-#     # 
-#     # TLS configuration:
-#     # traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-#     # traefik.ingress.kubernetes.io/router.tls: "true"
-#     # 
-#     # Middleware:
-#     # traefik.ingress.kubernetes.io/router.middlewares:your-middleware@kubernetescrd
-# spec:
-#   rules:
-#   - host: "localhost"  # Your hostname
-#     http:
-#       paths:
-#       # Path-based routing settings:
-#       - path: /
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: nginx  # The name of the service
-#             port:
-#               number: 80  # Service Portnumber
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: ingressroutetcp-nginx-svc
+  namespace: nginx
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: HostSNI(`*`)
+    services:
+    - name: nginx
+      namespace: nginx
+      port: 9090
