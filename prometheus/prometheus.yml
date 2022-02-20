@@ -58,7 +58,7 @@ metadata:
   namespace: monitoring
 spec:
   entryPoints:
-    - web
+    - apigw
   routes:
   - kind: Rule
     match: "Host(`localhost`)"    
