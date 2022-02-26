@@ -11,6 +11,9 @@ spec:
     targetRevision: 10.14.2
     helm:
       values: |
+        ingressRoute:
+          dashboard:
+            enabled: true
         ports:
           web:
             port: 8000
@@ -111,4 +114,4 @@ spec:
       - CreateNamespace=true
     automated:
       prune: true
-      selfHeal: true
+      selfHeal: false
