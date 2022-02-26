@@ -1,10 +1,8 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: traefik
-  namespace: traefik
-  labels:
-    app: traefik  
+  namespace: argocd
 spec:
   project: default
   source:
@@ -42,7 +40,7 @@ spec:
               #     - bar.example.com        
           argocd:
             port: 30443
-            expose: false
+            expose: true
             exposedPort: 30443
             protocol: TCP         
           traefik:
@@ -98,9 +96,7 @@ spec:
           # spec: {
           #   externalTrafficPolicy: Cluster
           # }
-            
-      
-          
+                      
         logs:
           general:
             level: DEBUG
@@ -111,5 +107,8 @@ spec:
     server: https://kubernetes.default.svc
     namespace: traefik
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
-      selfHeal: false
+      prune: true
+      selfHeal: true
