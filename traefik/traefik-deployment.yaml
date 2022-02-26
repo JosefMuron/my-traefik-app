@@ -1,0 +1,23 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik-app
+  namespace: argocd  
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: traefik
+  source:
+    path: traefik/traefik/
+    repoURL: https://github.com/JosefMuron/my-traefik-app.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: false
