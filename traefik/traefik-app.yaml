@@ -12,9 +12,35 @@ spec:
     helm:
       values: |
         ports:
+          web:
+            port: 8000
+            # hostPort: 8000
+            expose: false
+            exposedPort: 80
+            protocol: TCP        
+          websecure:
+            port: 8443
+            # hostPort: 8443
+            expose: false
+            exposedPort: 443
+            # The port protocol (TCP/UDP)
+            protocol: TCP
+            # nodePort: 32443
+            # Set TLS at the entrypoint
+            # https://doc.traefik.io/traefik/routing/entrypoints/#tls
+            tls:
+              enabled: true
+              # this is the name of a TLSOption definition
+              options: ""
+              certResolver: ""
+              domains: []
+              # - main: example.com
+              #   sans:
+              #     - foo.example.com
+              #     - bar.example.com        
           argocd:
             port: 30443
-            expose: true
+            expose: false
             exposedPort: 30443
             protocol: TCP         
           traefik:
@@ -22,9 +48,9 @@ spec:
             expose: false
             exposedPort: 9000
             protocol: TCP        
-          apigw:
+          nginx:
             port: 9090
-            expose: false
+            expose: true
             exposedPort: 9090
             protocol: TCP
           metrics:
@@ -60,7 +86,7 @@ spec:
           annotations: {
             service.beta.kubernetes.io/aws-load-balancer-internal: "false",
             service.beta.kubernetes.io/aws-load-balancer-type: "nlb",
-            # service.beta.kubernetes.io/load-balancer-source-ranges: "164.215.116.246/32",
+            service.beta.kubernetes.io/load-balancer-source-ranges: "94.242.124.58/32",
             # service.beta.kubernetes.io/aws-load-balancer-type: "external",
             # service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance",
             # service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing",

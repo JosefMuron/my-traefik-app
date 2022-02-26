@@ -62,12 +62,12 @@ metadata:
   namespace: nginx
 spec:
   entryPoints:
-    - web
+    - nginx
   routes:
   - match: HostSNI(`*`)
-    middlewares:
-    - name: middlewaretcp-ipwhitelist-nginx
-      namespace: nginx
+    # middlewares:
+    # - name: middlewaretcp-ipwhitelist-nginx
+    #   namespace: nginx
     services:
     - name: nginx
       namespace: nginx
