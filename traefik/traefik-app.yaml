@@ -1,8 +1,10 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: traefik
-  namespace: argocd
+  namespace: traefik
+  labels:
+    app: traefik  
 spec:
   project: default
   source:
