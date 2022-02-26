@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: Traefik-routes
+  name: traefik-routes
   namespace: argocd  
 spec:
   destination:
