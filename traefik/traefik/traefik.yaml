@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: traefik
+  name: traefik-2.6.1
   namespace: argocd
 spec:
   project: default
@@ -48,7 +48,7 @@ spec:
             protocol: TCP         
           traefik:
             port: 9000
-            expose: true
+            expose: false
             exposedPort: 9000
             protocol: TCP        
           nginx:
@@ -114,4 +114,4 @@ spec:
       - CreateNamespace=true
     automated:
       prune: true
-      selfHeal: false
+      selfHeal: true
