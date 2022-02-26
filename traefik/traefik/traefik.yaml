@@ -73,6 +73,18 @@ spec:
             protocol: TCP
             nodePort: 32000
 
+        metrics:
+          prometheus:
+            entryPoint: metrics
+            buckets:
+              - 0.1
+              - 0.3
+              - 1.2
+              - 5.0
+            addEntryPointsLabels: true
+            addRoutersLabels: true
+            addServicesLabels: true
+            
         providers:
           kubernetesCRD:
             enabled: true
