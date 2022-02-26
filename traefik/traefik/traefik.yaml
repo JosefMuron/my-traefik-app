@@ -58,7 +58,7 @@ spec:
             protocol: TCP
           metrics:
             port: 9100
-            expose: true
+            expose: false
             exposedPort: 9100
             protocol: TCP
           consul:
