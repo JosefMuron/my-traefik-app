@@ -38,10 +38,9 @@ spec:
               options: ""
               certResolver: ""
               domains: []
-              # - main: example.com
-              #   sans:
-              #     - foo.example.com
-              #     - bar.example.com        
+              - main: zonkej.cz
+                sans:
+                  - pepanginx-test04.zonkej.cz      
           argocd:
             port: 8080
             expose: true
