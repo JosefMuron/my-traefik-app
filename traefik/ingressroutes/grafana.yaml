@@ -9,8 +9,8 @@ spec:
   routes:
   - kind: Rule
     match: "Host(Path(`/grafana`))"
-    # middlewares:
-    #   - name: grafana-middleware-replacepath
+    middlewares:
+      - name: grafana-middleware-addPrefix
     services:
     - name: grafana
       namespace: monitoring
@@ -19,8 +19,8 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: grafana-middleware-replacepath
+  name: grafana-middleware-addPrefix
   namespace: traefik
 spec:
-  replacePath:
-    path: /grafanka
+  addPrefix:
+    prefix: /foo
