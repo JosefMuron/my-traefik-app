@@ -33,7 +33,6 @@ spec:
       port: 9090
   tls:
     secretName: zonkej-secret
-    namespace: traefik
     # certificates:
     #   - certFile: /data/zonkej.cz.pem
     #     keyFile: /data/zonkej.cz.key
