@@ -22,7 +22,7 @@ metadata:
   name: grafana-middleware-stripprefix
   namespace: monitoring
 spec:
-  StripPrefix:
-    regex:
+  stripPrefix:
+    prefixes:
 #      - "/grafana/[a-z0-9]+/[0-9]+/"
       - /grafana        
