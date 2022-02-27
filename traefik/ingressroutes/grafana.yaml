@@ -9,8 +9,8 @@ spec:
   routes:
   - kind: Rule
     match: "Host(`pepa-test04.zonkej.cz`) && (PathPrefix(`/grafana`)"
-    middlewares:
-      - name: grafana-middleware-stripprefixregex
+    # middlewares:
+    #   - name: grafana-middleware-stripprefixregex
     services:
     - name: grafana
       port: 80
