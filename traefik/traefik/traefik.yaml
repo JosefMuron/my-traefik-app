@@ -117,7 +117,7 @@ spec:
             enabled: true
 
         persistence:
-          enabled: true
+          enabled: false
           name: data
         #  existingClaim: ""
           accessMode: ReadWriteOnce
