@@ -31,3 +31,7 @@ spec:
     - name: nginx
       namespace: nginx
       port: 9090
+    tls:
+      certificates:
+      - certFile: /path/to/mydomain.cert
+        keyFile: /path/to/mydomain.key

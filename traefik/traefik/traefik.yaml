@@ -119,6 +119,17 @@ spec:
           access:
             enabled: true
 
+        persistence:
+          enabled: true
+          name: data
+        #  existingClaim: ""
+          accessMode: ReadWriteOnce
+          size: 1Gi
+          # storageClass: ""
+          path: /data
+          annotations: {}
+          # subPath: "" # only mount a subpath of the Volume into the pod            
+
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
