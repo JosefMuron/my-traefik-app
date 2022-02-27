@@ -24,7 +24,7 @@ spec:
           websecure:
             port: 8443
             # hostPort: 8443
-            expose: false
+            expose: true
             exposedPort: 443
             # The port protocol (TCP/UDP)
             protocol: TCP
