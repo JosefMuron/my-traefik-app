@@ -5,8 +5,8 @@ metadata:
   namespace: traefik
 spec:
   entryPoints:
-    # - web
-    - websecure
+    - web
+    #- websecure
   routes:
   - kind: Rule
     match: "Host(`pepagrafana-test04.zonkej.cz`)"
