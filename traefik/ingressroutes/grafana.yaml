@@ -25,8 +25,8 @@ spec:
   chain:
     middlewares:
     # - name: grafana-replacepath
-    # - name: grafana-middleware-stripprefix
-    - name: grafana-stripprefixregex
+    - name: grafana-middleware-stripprefix
+    # - name: grafana-stripprefixregex
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -37,6 +37,7 @@ spec:
   stripPrefix:
     prefixes:
       - /grafana
+    forceSlash: false
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
