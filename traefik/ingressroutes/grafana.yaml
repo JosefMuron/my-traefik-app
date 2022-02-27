@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
   - kind: Rule
-    match: "Host(`pepagrafana-test04.zonkej.cz`)"
+    match: "Host(`https://pepagrafana-test04.zonkej.cz`)"
     # middlewares:
     #   - name: grafana-chain
     services:
