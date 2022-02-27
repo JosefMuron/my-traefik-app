@@ -32,7 +32,7 @@ spec:
             # Set TLS at the entrypoint
             # https://doc.traefik.io/traefik/routing/entrypoints/#tls
             tls:
-              enabled: true
+              enabled: false
               # this is the name of a TLSOption definition
               options: ""
               certResolver: ""
