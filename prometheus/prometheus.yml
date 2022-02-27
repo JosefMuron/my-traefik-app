@@ -1,70 +1,78 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: prometheus-deployment
-  namespace: monitoring
-  labels:
-    app: prometheus-server
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: prometheus-server
-  template:
-    metadata:
-      labels:
-        app: prometheus-server
-    spec:
-      containers:
-        - name: prometheus
-          image: prom/prometheus
-          args:
-            - "--config.file=/etc/prometheus/prometheus.yml"
-            - "--storage.tsdb.path=/prometheus/"
-          ports:
-            - containerPort: 9090
-      #     volumeMounts:
-      #       - name: prometheus-config-volume
-      #         mountPath: /etc/prometheus/
-      #       - name: prometheus-storage-volume
-      #         mountPath: /prometheus/
-      # volumes:
-      #   - name: prometheus-config-volume
-      #     configMap:
-      #       defaultMode: 420
-      #       name: prometheus-server-conf
-  
-      #   - name: prometheus-storage-volume
-      #     emptyDir: {}
----
-apiVersion: v1
-kind: Service
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: prometheus
-  namespace: monitoring
+  namespace: argocd
 spec:
-  selector:
-    app: prometheus-server
-  type: ClusterIP
-  ports:
-  - name:  http
-    port:  9090
-    targetPort: 9090
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: prometheus-ingressroute-http
-  namespace: monitoring
-spec:
-  entryPoints:
-    - apigw
-  routes:
-  - kind: Rule
-    match: "Host(`localhost`)"    
-    # middlewares:
-    #   - name: grafana-middleware-stripprefixregex
-    services:
-    - name: prometheus
-      namespace: monitoring
-      port: 9090
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus
+    targetRevision: 15.4.0
+    helm:
+      values: |
+        serviceAccounts:
+          alertmanager:
+            create: false
+            name:
+            annotations: {}
+          nodeExporter:
+            create: true
+            name:
+            annotations: {}
+          pushgateway:
+            create: false
+            name:
+            annotations: {}
+          server:
+            create: true
+            name:
+            annotations: {}
+
+        alertmanager:
+          enabled: false
+
+        server:
+          persistentVolume:
+            enabled: true
+            size: 1Gi
+
+        pushgateway:
+          enabled: false
+
+        serverFiles:
+          prometheus.yml:
+            scrape_configs:
+              - job_name: prometheus
+                static_configs:
+                  - targets:
+                    - localhost:9090
+              - job_name: traefik
+                static_configs:
+                  - targets:
+                    - traefik-2-6-1.traefik.svc.cluster.local:9100
+
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      selfHeal: true
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: prometheus-ingressroute-http
+#   namespace: monitoring
+# spec:
+#   entryPoints:
+#     - web
+#   routes:
+#   - kind: Rule
+#     match: "Host(`localhost`)"    
+#     # middlewares:
+#     #   - name: grafana-middleware-stripprefixregex
+#     services:
+#     - name: prometheus
+#       port: 80

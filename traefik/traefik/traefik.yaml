@@ -101,7 +101,7 @@ spec:
           annotations: {
             service.beta.kubernetes.io/aws-load-balancer-internal: "false",
             service.beta.kubernetes.io/aws-load-balancer-type: "nlb",
-            service.beta.kubernetes.io/load-balancer-source-ranges: "94.242.124.58/32, 34.117.59.81/32, 193.165.169.170/32, 90.181.164.130/32",
+            service.beta.kubernetes.io/load-balancer-source-ranges: "94.242.124.58/32, 34.117.59.81/32, 193.165.169.170/32, 90.181.164.130/32, 193.165.201.34/32",
             # service.beta.kubernetes.io/aws-load-balancer-type: "external",
             # service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance",
             # service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing",
