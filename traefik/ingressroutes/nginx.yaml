@@ -5,25 +5,28 @@ metadata:
   namespace: traefik
 spec:
   entryPoints:
-    - websecure
+    - nginx
   routes:
   - match: HostSNI(`*`)
-    # middlewares:
-    # - name: middlewaretcp-ipwhitelist-nginx
-    #   namespace: nginx
     services:
     - name: nginx
       namespace: nginx
       port: 9090
 ---
 apiVersion: traefik.containo.us/v1alpha1
-kind: MiddlewareTCP
+kind: IngressRoute
 metadata:
-  name: middlewaretcp-ipwhitelist-nginx
+  name: route-nginx
   namespace: traefik
 spec:
-  ipWhiteList:
-    sourceRange:
-      # - 193.165.201.34
-      - 127.0.0.1/32
-      - 10.29.0.0/16
+  entryPoints:
+    - websecure
+  routes:
+  - kind: Rule
+    match: "Host(`pepanginx-test04.zonkej.cz`)"
+    # middlewares:
+    #   - name: grafana-chain
+    services:
+    - name: nginx
+      namespace: nginx
+      port: 9090
