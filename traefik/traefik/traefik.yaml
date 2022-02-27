@@ -37,11 +37,7 @@ spec:
               # this is the name of a TLSOption definition
               options: ""
               certResolver: ""
-              domains: [
-              - main: zonkej.cz
-                sans:
-                - pepanginx-test04.zonkej.cz      
-              ]
+              domains: []
               
           argocd:
             port: 8080
