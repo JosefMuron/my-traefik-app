@@ -42,9 +42,9 @@ spec:
               #     - foo.example.com
               #     - bar.example.com        
           argocd:
-            port: 8443
+            port: 8080
             expose: true
-            exposedPort: 8443
+            exposedPort: 8080
             protocol: TCP         
           traefik:
             port: 9000
