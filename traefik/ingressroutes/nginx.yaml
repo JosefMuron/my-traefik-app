@@ -33,5 +33,5 @@ spec:
       port: 9090
     tls:
       certificates:
-      - certFile: /data/zonkej.cz.pem
-        keyFile: /data/zonkej.cz.key
+        - certFile: /data/zonkej.cz.pem
+          keyFile: /data/zonkej.cz.key
