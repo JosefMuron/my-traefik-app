@@ -32,6 +32,8 @@ spec:
       namespace: nginx
       port: 9090
   tls:
-    certificates:
-      - certFile: /data/zonkej.cz.pem
-        keyFile: /data/zonkej.cz.key
+    secretName: zonkej-secret
+    namespace: traefik
+    # certificates:
+    #   - certFile: /data/zonkej.cz.pem
+    #     keyFile: /data/zonkej.cz.key
