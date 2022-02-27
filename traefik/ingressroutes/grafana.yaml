@@ -26,7 +26,7 @@ spec:
     middlewares:
     # - name: grafana-replacepath
     # - name: grafana-middleware-stripprefix
-    - name: grafana-replaceregex
+    - name: grafana-stripprefixregex
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -56,3 +56,12 @@ spec:
   replacePathRegex:
     regex: ^/grafana/(.*)
     replacement: /bar/$1
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: grafana-stripprefixregex
+spec:
+  stripPrefixRegex:
+    regex:
+      - "/grafana/[a-z0-9]+/[0-9]+/"
