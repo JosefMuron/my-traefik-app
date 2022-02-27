@@ -34,6 +34,7 @@ spec:
   tls:
     certResolver: zonkej-secret
     options:
+      name: zonkej-secret
       namespace: traefik
 
     # certificates:
