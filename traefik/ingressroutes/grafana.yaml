@@ -10,7 +10,7 @@ spec:
   - kind: Rule
     match: "Host(`pepa-test04.zonkej.cz`) && (PathPrefix(`/grafana`))"
     middlewares:
-      - name: grafana-middleware-stripprefixregex
+      - name: grafana-middleware-stripprefix
     services:
     - name: grafana
       namespace: monitoring
@@ -19,10 +19,10 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: grafana-middleware-stripprefixregex
+  name: grafana-middleware-stripprefix
   namespace: monitoring
 spec:
-  stripPrefix:
+  StripPrefix:
     regex:
 #      - "/grafana/[a-z0-9]+/[0-9]+/"
       - /grafana        
