@@ -32,7 +32,8 @@ spec:
       namespace: nginx
       port: 9090
   tls:
-    secretName: zonkej-secret
+    store: 
+      name: default
     
     
     # secretName: zonkej-secret
