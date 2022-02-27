@@ -32,11 +32,7 @@ spec:
       namespace: nginx
       port: 9090
   tls:
-    stores:
-      default:
-        defaultCertificate:
-          certFile: /data/zonkej.cz.pem
-          keyFile: /data/zonkej.cz.key
+    - secretName: zonkej-secret
     
     
     # secretName: zonkej-secret
