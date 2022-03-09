@@ -8,12 +8,12 @@ spec:
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: prometheus
-    targetRevision: 15.4.0
+    targetRevision: 15.5.3
     helm:
       values: |
         serviceAccounts:
           alertmanager:
-            create: false
+            create: true
             name:
             annotations: {}
           nodeExporter:
@@ -30,12 +30,88 @@ spec:
             annotations: {}
 
         alertmanager:
-          enabled: false
+          enabled: true
+          persistentVolume:
+            ## If true, alertmanager will create/use a Persistent Volume Claim
+            ## If false, use emptyDir
+            ##
+            enabled: true
 
+            ## alertmanager data Persistent Volume access modes
+            ## Must match those of existing PV or dynamic provisioner
+            ## Ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+            ##
+            accessModes:
+              - ReadWriteOnce
+
+            ## alertmanager data Persistent Volume Claim annotations
+            ##
+            annotations: {}
+
+            ## alertmanager data Persistent Volume existing claim name
+            ## Requires alertmanager.persistentVolume.enabled: true
+            ## If defined, PVC must be created manually before volume will be bound
+            existingClaim: "pvc-prometheus-alertmanager"
+
+            ## alertmanager data Persistent Volume mount root path
+            ##
+            mountPath: /data
+
+            ## alertmanager data Persistent Volume size
+            ##
+            size: 4Gi
+
+            ## alertmanager data Persistent Volume Storage Class
+            ## If defined, storageClassName: <storageClass>
+            ## If set to "-", storageClassName: "", which disables dynamic provisioning
+            ## If undefined (the default) or set to null, no storageClassName spec is
+            ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+            ##   GKE, AWS & OpenStack)
+            ##
+            # storageClass: "-"        
         server:
           persistentVolume:
+            ## If true, Prometheus server will create/use a Persistent Volume Claim
+            ## If false, use emptyDir
+            ##
             enabled: true
-            size: 1Gi
+
+            ## Prometheus server data Persistent Volume access modes
+            ## Must match those of existing PV or dynamic provisioner
+            ## Ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+            ##
+            accessModes:
+              - ReadWriteOnce
+
+            ## Prometheus server data Persistent Volume annotations
+            ##
+            annotations: {}
+
+            ## Prometheus server data Persistent Volume existing claim name
+            ## Requires server.persistentVolume.enabled: true
+            ## If defined, PVC must be created manually before volume will be bound
+            existingClaim: "pvc-prometheus-server"
+
+            ## Prometheus server data Persistent Volume mount root path
+            ##
+            mountPath: /data
+
+            ## Prometheus server data Persistent Volume size
+            ##
+            size: 10Gi
+            ## Prometheus server data Persistent Volume Storage Class
+            ## If defined, storageClassName: <storageClass>
+            ## If set to "-", storageClassName: "", which disables dynamic provisioning
+            ## If undefined (the default) or set to null, no storageClassName spec is
+            ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+            ##   GKE, AWS & OpenStack)
+            ##            
+            storageClass: gp2
+            
+        # nodeExporter:
+        #   nodeSelector: {
+        #     topology.kubernetes.io/zone: eu-west-1a
+        #   }
 
         pushgateway:
           enabled: false
