@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: pepa-gp2
+  storageClassName: eu-west-1c-gp2
