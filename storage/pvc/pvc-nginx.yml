@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: eu-west-1c-gp2
+  storageClassName: ebs-gp2
